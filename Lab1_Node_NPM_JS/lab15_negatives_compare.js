@@ -1,5 +1,7 @@
 /**
  * JS中Boolean值為false的物件比較
+ * == 比較內容
+ * === 比較內容 及 型態
  */
 
 var negatives = [undefined, false, 0, null, NaN, ""] // JS中絕對是false的物件大集合 XD
