@@ -1,6 +1,7 @@
 /**
  * 透過 http 套件來建立一個簡易的 http server 
  * 並設定啟動 port 為 8765
+ * 一樣可透過 debugger 進行 server side 的即時 debug 唷～～
  */
 
  var http = require('http')
