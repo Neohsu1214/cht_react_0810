@@ -5,5 +5,7 @@
 		}
 	],
 	"settings": {
+		"editor.fontSize": 14,
+		"editor.fontFamily": "'Source Code Variable', Menlo, Monaco, 'Courier New', monospace"
 	}
 }
