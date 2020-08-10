@@ -1,5 +1,5 @@
 /**
- * 說明JS的基本型別
+ * 用 typeof 說明JS的基本型別
  */
 console.log('i', 'am', 'a', 'variable')
 console.log("10 , 3.14 type = ", typeof 10, typeof 3.14)
