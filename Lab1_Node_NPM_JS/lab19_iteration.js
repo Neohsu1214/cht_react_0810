@@ -12,3 +12,15 @@ for (var index in chosen) {
 for (var item of chosen) {
     console.log('value = ', item)
 }
+
+// JS變數也可以在字串中嵌入！！但 '' 要變成 ``
+var stores = ['7-11', 'fami', 'OK', 'hi-life']
+for (index in stores) {
+    console.log(`index=${index}, value=${stores[index]}`)
+}
+
+// dictionary 也可以進行 iteration!
+var dict1 = { name: 'Mark', role: 'R&D', age: 43 }
+for (index in dict1) {
+    console.log(index, dict1[index])
+}
