@@ -23,6 +23,16 @@ function loop3() {
     for (let k = 0; k < 10; k++) {
         console.log("inner loop:", k)
     }
-    console.log("finish! k=", k) // 用 let 宣告的就真的存取不到囉！
+    //console.log("finish! k=", k) // 用 let 宣告的就真的存取不到囉！
 }
 loop3()
+
+function loop4() {
+    var l = 0
+    for (let m = l; m < 10; m++) {
+        console.log("m=", m)
+    }
+    console.log("l=", l)
+    //console.log("m=", m) // 用 let 宣告的就真的存取不到囉！
+}
+loop4()
