@@ -15,3 +15,9 @@ var myCar = new Car()
 console.log(myCar.getSpeed())
 myCar.speed = 50
 console.log(myCar.getSpeed())
+
+// myCarRun只是 funciton宣告，並非物件，可透過 debugger 查看（但其實做的過程仍有繼承prototype，所以嚴格說起來仍是Class XD）
+var myCarRun = function () {
+    console.log("super fast")
+}
+myCarRun()
