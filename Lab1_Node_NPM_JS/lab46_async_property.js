@@ -14,7 +14,7 @@ function FileObject() {
         console.log("about to open:" + this.filename)
         
         // fs.open 為非同步
-        //fs.open(this.filename, 'r', function (error, handler) {
+        //fs.open(this.filename, 'r', function (error, handler) { // this.filename 會是 undefined
         fs.open(this.filename, 'r', (error, handler) => {
             console.log("What is this?" + this, this.filename)
             if (error) {
