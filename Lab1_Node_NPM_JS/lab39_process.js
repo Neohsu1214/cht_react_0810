@@ -2,6 +2,7 @@
  * 說明如何使用 node 來進行檔案與路徑的操作
  * process
  * fs
+ * 此為『同步』的操作例，但不幸的是，node的作業大多是非同步的！
  */
 var process = require('process')
 console.log(process.cwd()) // 顯示檔案目前所在路徑
