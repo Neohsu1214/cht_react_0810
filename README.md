@@ -33,3 +33,25 @@ console.log("Hi, my program finished")
 * global
 * constant
 * code
+
+## Lab2_Babel_Modern_JS_Syntax
+* 初始化babel 專案
+```
+    npm init -y
+```
+* 安裝babel指令套件與webpack套件
+```
+npm install babel-loader @babel/core @babel/cli @babel/preset-env webpack
+```
+* 查看babel版本
+```
+npx babel --version
+```
+* 使用babel進行轉譯(轉譯到目前最低限度的javascript版本，若要轉譯成ES6,7等可支援的，必須安裝別的外掛)
+```
+npx babel lab1_var_let_const.js
+```
+* 在package.json給定『"build": "babel src -d out"』後，即可透過以下指令，將指定目錄中的檔案都編譯成Legacy JS
+```
+npm run build
+```
