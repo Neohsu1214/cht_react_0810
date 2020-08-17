@@ -61,3 +61,16 @@ npm run build
 ```
 npx create-react-app lab3_react_start
 ```
+* 啟動開發模式(會在 http://localhost:3000 啟動服務)
+```
+npm run start
+```
+* Chrome 安裝外掛工具（可以偵測所開啟的網頁是dev還是prod，並在F12中可看到Components跟Profiler兩個工具)
+```
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related?hl=zh-TW
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related?hl=zh-TW
+```
+* 安裝 serve 套件 (之後可以用 serve -s build 啟動 production 版本的 build)
+```
+npm install -g serve
+```
