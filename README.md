@@ -24,3 +24,12 @@ proxyRequest(URL, function (error, responese, body) {
 console.log("Hi, my program finished")
 
 ```
+
+## Lab48,49 javascript也是有記憶體處理的唷！
+* stack
+* heap
+   * variable
+   * buffer: 用來處理原始資料，方便在不同語言間傳遞資料
+* global
+* constant
+* code
