@@ -4,6 +4,7 @@
  * npm install @babel/plugin-proposal-class-properties
  * 並修改 .babelrc 加入以下宣告來增加 babel 對Class支援的外掛
  * "plugins": ["@babel/plugin-proposal-class-properties"]
+ * 這時候開始，終於可以直接執行 src 目錄中的檔案了！！
  */
 
 class Course {
@@ -14,3 +15,12 @@ class Course {
 }
 const c1 = new Course()
 c1.printDuration()
+
+class ReactCourse extends Course {
+    name = 'React'
+    printCourse = () => {
+        return `course name=${this.nane}`
+    }
+}
+const c2 = new ReactCourse()
+console.log(`c2 course ${c2.printCourse()}, duration ${c2.duration}`)
