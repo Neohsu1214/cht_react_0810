@@ -3,7 +3,7 @@
  * 此檔案無法直接用 node 執行，請先執行 npm run build 後，執行 out 內的才可以執行
  */
 import course from "./lab3_course" // 或 ./lab3_course.js 也可以
-import cxxx from "./lab3_course" // 可改寫 default 名稱
+import cxxx from "./lab3_course" // 可改寫 default 名稱（當有給定 export default 的時候，import 的地方就可隨意命名）
 console.log(course)
 console.log(cxxx)
 
