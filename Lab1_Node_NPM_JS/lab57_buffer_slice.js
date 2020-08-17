@@ -8,7 +8,7 @@ for (let i = 0; i < 26; i++) {
     buffer1[i] = i + 97
 }
 
-const buffer2 = buffer1.slice(0, 3)
+const buffer2 = buffer1.slice(0, 3) // 從 0 開始數 3個bytes
 console.log('buffer2 content: ' + buffer2.toString()) // abc
 
 const buffer3 = new Buffer.from('www.uuu.com.tw')
