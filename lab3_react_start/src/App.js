@@ -52,6 +52,9 @@ class App extends Component {
       <div className="App">
         <Counter step="2"></Counter>
         <h1>{this.state.title}</h1>
+        {
+          // 藉由 props 傳遞 state資料 與 callback函數 來做到與子元件之雙向綁定
+        }
         <Banner 
           clickCallback={this.titleChangeListener}
           name={this.state.title}
