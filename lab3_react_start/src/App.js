@@ -43,6 +43,15 @@ class App extends Component {
   }
 
   render() {
+    // 宣告一個區域型CSS
+    const style = {
+      background: "yellow",
+      font: "inherit",
+      border: "2px solid red",
+      padding: "4px",
+      cursor: 'pointer'
+    };
+
     // return 的內容其實是 JSX(JavaScriptXML) 而不是 HTML，需要經過React轉換輸出成 HTML+JS+CSS
     // return 的內容只能有一個 root <div>
     return (
@@ -65,7 +74,7 @@ class App extends Component {
           // 在JSX中的註解寫法
           // <button onClick={this.changeNameHandler.bind(this, "One Punchman")}>Change</button>
         }
-        <button onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
+        <button style={style} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
         <Person 
           clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
           name={this.state.persons[0].name} 
