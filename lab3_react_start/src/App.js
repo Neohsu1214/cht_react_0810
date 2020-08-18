@@ -62,21 +62,27 @@ class App extends Component {
     if (this.state.showPersons === true) {
       persons = (
         <div>
-          <Person 
-            clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age} />
-          <Pet name="King" species="cat">
-            <p style={{ color: "green" }}>喵</p>
-          </Pet>
-          <Person name={this.state.persons[1].name} age={this.state.persons[1].age}></Person>
-          <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>
-            Team Leader
-          </Person>
-          <Person name={this.state.persons[3].name} age={this.state.persons[3].age}></Person>
-          <Person name={this.state.persons[4].name} age={this.state.persons[4].age}></Person>
-          <Person name={this.state.persons[5].name} age={this.state.persons[5].age}></Person>
-          <Pet></Pet>
+        {
+          // <Person 
+          //   clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
+          //   name={this.state.persons[0].name} 
+          //   age={this.state.persons[0].age} />
+          // <Pet name="King" species="cat">
+          //   <p style={{ color: "green" }}>喵</p>
+          // </Pet>
+          // <Person name={this.state.persons[1].name} age={this.state.persons[1].age}></Person>
+          // <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>
+          //   Team Leader
+          // </Person>
+          // <Person name={this.state.persons[3].name} age={this.state.persons[3].age}></Person>
+          // <Person name={this.state.persons[4].name} age={this.state.persons[4].age}></Person>
+          // <Person name={this.state.persons[5].name} age={this.state.persons[5].age}></Person>
+          // <Pet></Pet>
+          // 將上述 Person 內容改用 map function 產出
+          this.state.persons.map( (person) => {
+            return <Person name={person.name} age={person.age}></Person>
+          })
+        }
         </div>
       )
     }
