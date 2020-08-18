@@ -3,7 +3,7 @@
  * react functional component
  * functinal component 可透過 arrow function 加以簡化！
  */
-import React from 'react'
+import React from "react";
 
 // export default function Person() {
 //     return (
@@ -15,6 +15,7 @@ import React from 'react'
 
 // 可以簡寫成
 const Person = () => {
-    return <p>I am groot</p>
-}
-export default Person
+  return <p>I am the {Math.floor(Math.random() * 5)}th groot</p>;
+  // JSX 中 {} 裡面可以放置 javascript 內容
+};
+export default Person;
