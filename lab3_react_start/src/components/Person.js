@@ -38,8 +38,9 @@ const Person = (props) => {
     <div className="Person">
       <button onClick={switchVendorHandler}>Change!</button>
       <button onClick={showStatusHandler}>Show!</button>
+      <button onClick={props.clickCallback}>Delete!</button>
       <h1>{stateString.publishier}</h1>
-      <p onClick={props.clickCallback}>I am {props.name}</p>
+      <p>I am {props.name}</p>
       <p>I am {props.age} years old</p>
       <p>I am the {Math.floor(Math.random() * 5)}th groot</p>
       <p style={{ color: "red" }}>My job function is {props.children}</p>
