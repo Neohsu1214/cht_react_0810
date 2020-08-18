@@ -4,7 +4,7 @@
  * functinal component 可透過 arrow function 加以簡化！
  * 說明如何透過 props 傳遞資訊給 Functional Based Component
  */
-import React from "react";
+import React, {useState} from "react";
 
 // export default function Person() {
 //     return (
@@ -20,8 +20,17 @@ import React from "react";
 // 可透過 props.xxx 接收 父component 的參數內容
 // 可透過 props.children 存取 父component tag 間的內容（類似Vue的slot）
 const Person = (props) => {
+  // 讓 functional component 也可以用 state (理論上是不行的，所以要宣告成 const)
+  const [stringState, changeString] = useState({publishier: "Marvel Universe"})
+  // 雖然 state 宣告成 const，但還是想異動內容！就要靠callback function的指定！
+  const switchVendorHandler = () => {
+    changeString({publishier: "DC Universe"})
+  }
+
   return (
     <div>
+    <button onClick={switchVendorHandler}>Change</button>
+    <h1>{stringState.publishier}</h1>
       <p>I am {props.name}</p>
       <p>I am {props.age} years old</p>
       <p>I am the {Math.floor(Math.random() * 5)}th groot</p>
