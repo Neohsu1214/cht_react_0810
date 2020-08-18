@@ -56,7 +56,7 @@ class App extends Component {
 
   render() {
     // 宣告一個區域型CSS
-    const style = {
+    const aStyle = {
       background: "yellow",
       font: "inherit",
       border: "2px solid red",
@@ -76,8 +76,8 @@ class App extends Component {
             name={person.name} age={person.age} />
         })
       }</div>)
-      style.backgroundColor = 'red'
-      style.color='black'
+      aStyle.backgroundColor = 'red'
+      aStyle.color='black'
     }    
 
     // 動態給定 CSS class 名稱
@@ -108,12 +108,12 @@ class App extends Component {
         ></Banner>
         <Dashboard1></Dashboard1>
         <Dashboard2></Dashboard2>
-        <button key="btn1" style={style} onClick={() => this.toggleDisplayHandler()}> show/hide Persons </button>
+        <button key="btn1" style={aStyle} onClick={() => this.toggleDisplayHandler()}> show/hide Persons </button>
         {
           // 在JSX中的註解寫法
           // <button onClick={this.changeNameHandler.bind(this, "One Punchman")}>Change</button>
         }
-        <button key="btn2" style={style} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
+        <button key="btn2" style={aStyle} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
         {personsJSX}
       </div>
     );
