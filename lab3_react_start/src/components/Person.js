@@ -2,6 +2,7 @@
  * 可透過『rfc』來建立一個 Functional Based Component 的 Template
  * react functional component
  * functinal component 可透過 arrow function 加以簡化！
+ * 說明如何透過 props 傳遞資訊給 Functional Based Component
  */
 import React from "react";
 
