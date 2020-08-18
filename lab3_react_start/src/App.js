@@ -26,8 +26,9 @@ function App() {
     // )
 
     // 改用 import 外部 component！直接在 div 內輸入 <component名稱> IDE外掛會自動幫你import進來
+    // JSX tag名稱務必要與component名稱大小寫一致（這點跟Vue很不一樣）
     <div className="App">
-      <Dashboard1></Dashboard1>
+      <Dashboard1></Dashboard1> 
       <Person></Person>
       <Dashboard2></Dashboard2>
       <Person></Person>
