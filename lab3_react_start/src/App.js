@@ -7,6 +7,7 @@ import Person from './components/Person';
 import Pet from './components/Pet';
 import Counter from './components/Counter';
 import Banner from './components/Banner';
+import Radium from 'radium';
 
 //function App() {
 class App extends Component {
@@ -60,7 +61,8 @@ class App extends Component {
       font: "inherit",
       border: "2px solid red",
       padding: "4px",
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ":hover":{backgroundColor:'lightblue',color:'black'}
     };
 
     // 將要顯示/隱藏的 JSX 區塊提出來設定，增加程式可讀性
@@ -106,16 +108,16 @@ class App extends Component {
         ></Banner>
         <Dashboard1></Dashboard1>
         <Dashboard2></Dashboard2>
+        <button key="btn1" style={style} onClick={() => this.toggleDisplayHandler()}> show/hide Persons </button>
         {
           // 在JSX中的註解寫法
           // <button onClick={this.changeNameHandler.bind(this, "One Punchman")}>Change</button>
         }
-        <button style={style} onClick={() => this.toggleDisplayHandler()}> show/hide Persons </button>
-        <button style={style} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
+        <button key="btn2" style={style} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
         {personsJSX}
       </div>
     );
   }
 }
 
-export default App;
+export default Radium(App);
