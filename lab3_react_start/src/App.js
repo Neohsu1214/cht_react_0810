@@ -33,7 +33,7 @@ function App() {
       <Dashboard1></Dashboard1> 
       <Dashboard2></Dashboard2>
       <Person name="Mark" age="43"></Person>
-      <Pet name="King" species="cat"></Pet>
+      <Pet name="King" species="cat">喵</Pet>
       <Person name="James" age="38"></Person>
       <Person name="Tim" age="33">Team Leader</Person>
       <Person name="Mary" age="28"></Person>
