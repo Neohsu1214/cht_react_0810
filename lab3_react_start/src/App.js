@@ -21,11 +21,11 @@ class App extends Component {
     ]
   }
 
-  changeNameHandler = () => {
+  changeNameHandler = (leaderName) => {
     console.log("change button clicked")    
     this.setState({
       persons: [
-        {name: "X man", age: 45},
+        {name: leaderName, age: 45},
         {name: "Captain America", age: 35},
         {name: "Iron man", age: 42},
         {name: "Thor", age: 200},
@@ -46,8 +46,14 @@ class App extends Component {
         <Counter step="2"></Counter>
         <Dashboard1></Dashboard1>
         <Dashboard2></Dashboard2>
-        <button onClick={this.changeNameHandler}>Change</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+        {
+          // 在JSX中的註解寫法
+        }
+        <button onClick={this.changeNameHandler.bind(this, "One Punchman")}>Change</button>
+        <Person 
+          clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age} />
         <Pet name="King" species="cat">
           <p style={{ color: "green" }}>喵</p>
         </Pet>
