@@ -4,6 +4,8 @@
  * But 畫面上卻無法更新！？搞毛啊！？
  * 因為 React 為了 render 的效能，所以不會一直更新畫面
  * 若要修改則要透過 setState 必須透過setState來更新DOM
+ * 會發現console.log輸出的state不一定會更新！因為 setState是非同步的動作！
+ * 可以在setState後面加上callback function確認值是否已被更新
  */
 
 import React, { Component } from "react";
@@ -22,7 +24,9 @@ export default class Counter extends Component {
   clickHandler = () => {
     //this.state.count += 1 // 無法正常顯示在畫面上！必須透過setState來更新DOM
     const nextVal = this.state.count + 1
-    this.setState({count: nextVal})
+    this.setState({count: nextVal}, () => {
+        console.log(`callback value = ${this.state.count}`)
+    })
     console.log(`button clicked ${this.state.count} times`)
   };
 
