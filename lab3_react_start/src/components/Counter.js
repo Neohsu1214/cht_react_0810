@@ -16,18 +16,47 @@ export default class Counter extends Component {
     super(props);
 
     this.state = {
-        count: 0
+      count: 0,
     };
-    
   }
 
   clickHandler = () => {
+    // 1. 直接異動 state
     //this.state.count += 1 // 無法正常顯示在畫面上！必須透過setState來更新DOM
-    const nextVal = this.state.count + 1
-    this.setState({count: nextVal}, () => {
-        console.log(`callback value = ${this.state.count}`)
-    })
-    console.log(`button clicked ${this.state.count} times`)
+    // 2. 透過 setState 並給定新的值來更新 state
+    // const nextVal = this.state.count + 1
+    // this.setState({count: nextVal}, () => {
+    //     console.log(`callback value = ${this.state.count}`)
+    // })
+    // 3. 使用 setState(prev, props)來更新 state，適用於多執行緒非同步處理
+    this.setState(
+      (prevState, props) => {
+        return { count: prevState.count + parseInt(props.step) };
+      },
+      () => {
+        console.log(`callback value = ${this.state.count}`);
+      }
+    );
+    console.log(`button clicked ${this.state.count} times`);
+  };
+
+  /**
+   * 寫一個連續觸發10次click的按鈕
+   * But! 發現呼叫了10次卻沒改變state?!
+   * 原因：React有一個處理event loop的機制，當出現race condition時，將 setState 的動作化簡成1次！！
+   * 解法：使用 setState(prev, props)來更新 state
+   */
+  clickHandler10 = () => {
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
+    this.clickHandler();
   };
 
   render() {
@@ -35,6 +64,7 @@ export default class Counter extends Component {
       <div>
         <h2>counter = {this.state.count}</h2>
         <button onClick={this.clickHandler}>click!</button>
+        <button onClick={this.clickHandler10}>10x click!</button>
       </div>
     );
   }
