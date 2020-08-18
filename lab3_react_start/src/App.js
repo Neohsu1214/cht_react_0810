@@ -78,6 +78,16 @@ class App extends Component {
       style.color='black'
     }    
 
+    // 動態給定 CSS class 名稱
+    //let classes = ['blue', 'bold'].join(' ')
+    const classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('blue')
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold')
+    }
+
     // return 的內容其實是 JSX(JavaScriptXML) 而不是 HTML，需要經過React轉換輸出成 HTML+JS+CSS
     // return 的內容只能有一個 root <div>
     return (
@@ -86,7 +96,7 @@ class App extends Component {
       // JSX tag中可加入 attribute 來傳遞資料給 Components
       <div className="App">
         <Counter step="2"></Counter>
-        <h1>{this.state.title}</h1>
+        <h1 className={classes}>{this.state.title}</h1>
         {
           // 藉由 props 傳遞 state資料 與 callback函數 來做到與子元件之雙向綁定
         }
