@@ -29,9 +29,13 @@ function App() {
     // JSX tag名稱務必要與component名稱大小寫一致（這點跟Vue很不一樣）
     <div className="App">
       <Dashboard1></Dashboard1> 
-      <Person></Person>
       <Dashboard2></Dashboard2>
-      <Person></Person>
+      <Person name="Mark" age="43"></Person>
+      <Person name="James" age="38"></Person>
+      <Person name="Tim" age="33">Team Leader</Person>
+      <Person name="Mary" age="28"></Person>
+      <Person name="Abby" age="34"></Person>
+      <Person name="Kevin" age="50"></Person>
     </div>
   );
 }

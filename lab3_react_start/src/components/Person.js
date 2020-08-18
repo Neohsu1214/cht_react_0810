@@ -14,8 +14,15 @@ import React from "react";
 // }
 
 // 可以簡寫成
-const Person = () => {
-  return <p>I am the {Math.floor(Math.random() * 5)}th groot</p>;
+//const Person = () => {
+// 可在參數加入 props 來接收 父component 的參數內容
+const Person = props => {
+  return (
+    <p>
+      I am {props.name}, I am {props.age} years old. 
+      I am the {Math.floor(Math.random() * 5)}th groot
+    </p>
+  );
   // JSX 中 {} 裡面可以放置 javascript 內容
 };
 export default Person;
