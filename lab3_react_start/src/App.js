@@ -4,6 +4,7 @@ import "./App.css";
 import Dashboard1 from "./components/Dashboard1";
 import Dashboard2 from "./components/Dashboard2";
 import Person from "./components/Person";
+import Pet from "./components/Pet";
 
 function App() {
   // return 的內容其實是 JSX(JavaScriptXML) 而不是 HTML，需要經過React轉換輸出成 HTML+JS+CSS
@@ -27,15 +28,18 @@ function App() {
 
     // 改用 import 外部 component！直接在 div 內輸入 <component名稱> IDE外掛會自動幫你import進來
     // JSX tag名稱務必要與component名稱大小寫一致（這點跟Vue很不一樣）
+    // JSX tag中可加入 attribute 來傳遞資料給 Components
     <div className="App">
       <Dashboard1></Dashboard1> 
       <Dashboard2></Dashboard2>
       <Person name="Mark" age="43"></Person>
+      <Pet name="King" species="cat"></Pet>
       <Person name="James" age="38"></Person>
       <Person name="Tim" age="33">Team Leader</Person>
       <Person name="Mary" age="28"></Person>
       <Person name="Abby" age="34"></Person>
       <Person name="Kevin" age="50"></Person>
+      <Pet></Pet>
     </div>
   );
 }
