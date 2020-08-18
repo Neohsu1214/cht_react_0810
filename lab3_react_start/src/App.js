@@ -48,8 +48,9 @@ class App extends Component {
         <Dashboard2></Dashboard2>
         {
           // 在JSX中的註解寫法
+          // <button onClick={this.changeNameHandler.bind(this, "One Punchman")}>Change</button>
         }
-        <button onClick={this.changeNameHandler.bind(this, "One Punchman")}>Change</button>
+        <button onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
         <Person 
           clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
           name={this.state.persons[0].name} 
