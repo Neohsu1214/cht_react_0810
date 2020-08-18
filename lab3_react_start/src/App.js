@@ -23,7 +23,6 @@ class App extends Component {
       { name: "Mary", age: 28 },
       { name: "abby", age: 34 },
       { name: "Kevin", age: 50 }
-
     ],
     title: "Hello React chtti302",
     showPersons: false
@@ -44,7 +43,14 @@ class App extends Component {
   }
 
   toggleDisplayHandler = () => {
-    this.setState( {showPersons: !this.state.showPersons} )
+    this.setState({ showPersons: !this.state.showPersons })
+  }
+
+  deletePersonHandler = personIndex => {
+    //const persons = this.state.persons
+    const persons = [...this.state.persons]
+    persons.splice(personIndex, 1)
+    this.setState({ persons: persons })
   }
 
   render() {
@@ -58,34 +64,19 @@ class App extends Component {
     };
 
     // 將要顯示/隱藏的 JSX 區塊提出來設定，增加程式可讀性
-    let persons = null;
+    let personsJSX = null;
     if (this.state.showPersons === true) {
-      persons = (
-        <div>
-        {
-          // <Person 
-          //   clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
-          //   name={this.state.persons[0].name} 
-          //   age={this.state.persons[0].age} />
-          // <Pet name="King" species="cat">
-          //   <p style={{ color: "green" }}>喵</p>
-          // </Pet>
-          // <Person name={this.state.persons[1].name} age={this.state.persons[1].age}></Person>
-          // <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>
-          //   Team Leader
-          // </Person>
-          // <Person name={this.state.persons[3].name} age={this.state.persons[3].age}></Person>
-          // <Person name={this.state.persons[4].name} age={this.state.persons[4].age}></Person>
-          // <Person name={this.state.persons[5].name} age={this.state.persons[5].age}></Person>
-          // <Pet></Pet>
-          // 將上述 Person 內容改用 map function 產出
-          this.state.persons.map( (person) => {
-            return <Person name={person.name} age={person.age}></Person>
-          })
-        }
-        </div>
-      )
-    }
+      personsJSX = (<div>{
+        this.state.persons.map((person, index) => {
+          return <Person
+            key={index}
+            clickCallback={() => this.deletePersonHandler(index)}
+            name={person.name} age={person.age} />
+        })
+      }</div>)
+      style.backgroundColor = 'red'
+      style.color='black'
+    }    
 
     // return 的內容其實是 JSX(JavaScriptXML) 而不是 HTML，需要經過React轉換輸出成 HTML+JS+CSS
     // return 的內容只能有一個 root <div>
@@ -109,9 +100,9 @@ class App extends Component {
           // 在JSX中的註解寫法
           // <button onClick={this.changeNameHandler.bind(this, "One Punchman")}>Change</button>
         }
-        <button style={style} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
         <button style={style} onClick={() => this.toggleDisplayHandler()}> show/hide Persons </button>
-        {persons}
+        <button style={style} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
+        {personsJSX}
       </div>
     );
   }
