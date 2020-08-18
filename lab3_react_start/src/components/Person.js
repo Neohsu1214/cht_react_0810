@@ -5,6 +5,7 @@
  * 說明如何透過 props 傳遞資訊給 Functional Based Component
  */
 import React, {useState} from "react";
+import "./Person.css"
 
 // export default function Person() {
 //     return (
@@ -34,10 +35,10 @@ const Person = (props) => {
     console.log(stateString)
   }
   return (
-    <div>
-    <button onClick={switchVendorHandler}>Change!</button>
-    <button onClick={showStatusHandler}>Show!</button>
-    <h1>{stateString.publishier}</h1>
+    <div className="Person">
+      <button onClick={switchVendorHandler}>Change!</button>
+      <button onClick={showStatusHandler}>Show!</button>
+      <h1>{stateString.publishier}</h1>
       <p onClick={props.clickCallback}>I am {props.name}</p>
       <p>I am {props.age} years old</p>
       <p>I am the {Math.floor(Math.random() * 5)}th groot</p>
