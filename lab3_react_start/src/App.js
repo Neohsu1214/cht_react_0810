@@ -6,9 +6,15 @@ import Dashboard2 from './components/Dashboard2';
 import Person from './components/Person';
 import Pet from './components/Pet';
 import Counter from './components/Counter';
+import Banner from './components/Banner';
 
 //function App() {
 class App extends Component {
+
+  titleChangeListener = (event) => {
+    this.setState({title: event.target.value})
+  }
+
   state = {
     persons: [
       { name: "Mark", age: 43 },
@@ -18,7 +24,8 @@ class App extends Component {
       { name: "abby", age: 34 },
       { name: "Kevin", age: 50 }
 
-    ]
+    ],
+    title: "Hello React chtti302"
   }
 
   changeNameHandler = (leaderName) => {
@@ -44,6 +51,11 @@ class App extends Component {
       // JSX tag中可加入 attribute 來傳遞資料給 Components
       <div className="App">
         <Counter step="2"></Counter>
+        <h1>{this.state.title}</h1>
+        <Banner 
+          clickCallback={this.titleChangeListener}
+          name={this.state.title}
+        ></Banner>
         <Dashboard1></Dashboard1>
         <Dashboard2></Dashboard2>
         {
