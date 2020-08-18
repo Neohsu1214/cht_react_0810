@@ -57,6 +57,30 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    // 將要顯示/隱藏的 JSX 區塊提出來設定，增加程式可讀性
+    let persons = null;
+    if (this.state.showPersons === true) {
+      persons = (
+        <div>
+          <Person 
+            clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age} />
+          <Pet name="King" species="cat">
+            <p style={{ color: "green" }}>喵</p>
+          </Pet>
+          <Person name={this.state.persons[1].name} age={this.state.persons[1].age}></Person>
+          <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>
+            Team Leader
+          </Person>
+          <Person name={this.state.persons[3].name} age={this.state.persons[3].age}></Person>
+          <Person name={this.state.persons[4].name} age={this.state.persons[4].age}></Person>
+          <Person name={this.state.persons[5].name} age={this.state.persons[5].age}></Person>
+          <Pet></Pet>
+        </div>
+      )
+    }
+
     // return 的內容其實是 JSX(JavaScriptXML) 而不是 HTML，需要經過React轉換輸出成 HTML+JS+CSS
     // return 的內容只能有一個 root <div>
     return (
@@ -81,28 +105,7 @@ class App extends Component {
         }
         <button style={style} onClick={() => this.changeNameHandler("One Punchman")}>Change</button>
         <button style={style} onClick={() => this.toggleDisplayHandler()}> show/hide Persons </button>
-        {
-          this.state.showPersons === true ? 
-          <div>
-            <Person 
-              clickCallback={this.changeNameHandler.bind(this, "Peter Pan")}
-              name={this.state.persons[0].name} 
-              age={this.state.persons[0].age} />
-            <Pet name="King" species="cat">
-              <p style={{ color: "green" }}>喵</p>
-            </Pet>
-            <Person name={this.state.persons[1].name} age={this.state.persons[1].age}></Person>
-            <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>
-              Team Leader
-            </Person>
-            <Person name={this.state.persons[3].name} age={this.state.persons[3].age}></Person>
-            <Person name={this.state.persons[4].name} age={this.state.persons[4].age}></Person>
-            <Person name={this.state.persons[5].name} age={this.state.persons[5].age}></Person>
-            <Pet></Pet>
-          </div>
-          : null
-        }
-        
+        {persons}
       </div>
     );
   }
