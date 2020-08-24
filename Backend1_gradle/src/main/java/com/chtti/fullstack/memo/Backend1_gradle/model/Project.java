@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -31,6 +32,8 @@ public class Project {
     @NotBlank(message = "project name is required!")
     private String projectName;
     @NotBlank(message = "project identifier is required!")
+    @Size(min=6, max=16,message = "project identifier length should between 6 to 16 chars") //限制內容長度
+    @Column(updatable = false, unique = true) // 限制不可修改，限制不可重複
     private String projectIdentifier;
     @NotBlank(message = "description is required!")
     private String description;
