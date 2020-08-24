@@ -31,9 +31,9 @@ public class Project {
     private Long id;
     @NotBlank(message = "project name is required!")
     private String projectName;
-    @NotBlank(message = "project identifier is required!")
-    @Size(min=6, max=16,message = "project identifier length should between 6 to 16 chars") //限制內容長度
-    @Column(updatable = false, unique = true) // 限制不可修改，限制不可重複
+    @NotBlank(message = "project identifier is required!") // 不可為空白，會透過 BindingResult 反應錯誤
+    @Size(min=6, max=16,message = "project identifier length should between 6 to 16 chars") //限制內容長度，會透過 BindingResult 反應錯誤
+    @Column(updatable = false, unique = true) // 限制不可修改，限制不可重複。由於是DB上的限制，所以不會透過 BindingResult 反應錯誤
     private String projectIdentifier;
     @NotBlank(message = "description is required!")
     private String description;

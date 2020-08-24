@@ -27,9 +27,10 @@ public class ProjectController {
     @PostMapping("")
     public ResponseEntity<?> // 表示可回傳任何型態的 ResponseEntity
     createNewProject(@Valid @RequestBody Project project
-            , BindingResult bindingResult) {
+            , BindingResult bindingResult) { // 有下達 @Valid 的話，會把驗證(NotBlank, Size等)的結果丟給 bindingResult 中
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>("Invalid Project Object", HttpStatus.BAD_REQUEST);
+            //return new ResponseEntity<>("Invalid Project Object", HttpStatus.BAD_REQUEST); // 只回傳簡短錯誤訊息
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.BAD_REQUEST); // 透過BindingResult取得完整錯誤訊息
         }
         // 送一個 project 進來處理
         Project project1 = projectService.saveOrUpdateProject(project);
