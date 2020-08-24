@@ -1,5 +1,6 @@
 package com.chtti.fullstack.memo.Backend1_gradle.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,9 +30,13 @@ public class Project {
     private String projectName;
     private String projectIdentifier;
     private String description;
+    @JsonFormat(pattern="yyyy-MM-dd") // 標注日期格式
     private Date startDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
 
     @PrePersist // 要在創建前，記下時間
