@@ -89,3 +89,73 @@ npm install -g serve
 * 可適用於 React, Vue(?!), Angular(?!)
 * 若要再React上使用，要安裝 react-redux 套件
 * 是一個store工具，類似 Windows 的 Registry用來存放資料
+
+### 一些 IntelliJ 上的設定
+1. Configure Settings
+( ) (不選) Reopen projects on startup
+Open Project in New Window
+
+2. Configure/Structure for new project
+Build/Execution/Deployment
+Compiler/Annotation Processors
+(***) Enable annotation processing
+
+3. Configure/Edit Custom VM Options
+-Xms128m
+-Xmx750m
+==>
+-Xms2048m
+-Xmx2048m
+
+4. Editor/General ==> Change font size with ctrl+Mouse wheel
+Font Source Code Pro
+Size 24
+Line spacing 0.8
+https://github.com/adobe-fonts/source-code-pro
+
+5. enable intelliJ proxy setting
+
+### 從 start.spring.io 建立 springboot 專案
+1. https://start.spring.io/
+2. 所需要的套件與資訊（湊成的URL)
+	https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.3.3.RELEASE&packaging=jar&jvmVersion=11&groupId=com.chtti.fullstack.demo&artifactId=Backend1&name=Backend1&description=Demo%20project%20for%20Spring%20Boot%20to%20provide%20backend&packageName=com.chtti.fullstack.demo.Backend1&dependencies=devtools,devtools,lombok,lombok,web,data-jpa,h2
+3. 從 IntelliJ 匯入Springboot專案
+	如果是 gradle 專案，直接點選或拖拉 build.gradle
+	如果是 maven 專案，請開啟pom.xml 檔
+		 File/New/Project from Existing Source
+		(for maven)
+		C:\Users\chtti\Downloads\Backend1_maven\pom.xml
+
+### add `gradle.properties` under `.gradle`
+```
+systemProp.http.proxyHost=proxy.cht.com.tw
+systemProp.http.proxyPort=8080
+systemProp.https.proxyHost=proxy.cht.com.tw
+systemProp.https.proxyPort=8080
+```
+
+### 一些 gradlew 的指令
+* 查版本
+```
+./gradlew --version
+```
+* 直接執行sprintgboot專案，執行CI進行測試項目
+```
+./gradlew bootrun
+```
+
+### 一些 mvnw 的指令
+* 查版本
+```
+./mvnw --version
+```
+* 直接執行sprintgboot專案，執行CI進行測試項目
+```
+./mvnw spring-boot:run
+```
+
+### 執行 springboot 專案的三種方式
+可參考 https://blog.xuite.net/hs19890622/job/388606028-%E5%9F%B7%E8%A1%8CSpring+Boot+%E5%B0%88%E6%A1%88%E7%9A%84%E6%96%B9%E5%BC%8F
+1. bootrun
+2. 包裝成可執行檔 jar
+3. 包裝成可部署檔 war
