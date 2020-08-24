@@ -74,3 +74,18 @@ https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopl
 ```
 npm install -g serve
 ```
+
+### React Component 的 Props 與 State
+* Props 可以視為是Components之間溝通的『參數』，所以是不可變的
+* State 為Component內自己可以動用的『變數』，所以是可變的
+
+### Axios 處理的項目
+* 處理複雜的 Request/Response 的資料處理：straam -> buffer -> json
+* 進行非同步 ajax 呼叫及 promise 處理
+* 所以到我們手上，我們只需要針對非同步呼叫後的狀況進行處理：then, fail, finally 等
+
+### Redux
+* Components 之間的資料傳遞若都是靠props 時，要跨多層次 Components 傳遞資料會很麻煩，所以 Redux就出現了！
+* 可適用於 React, Vue(?!), Angular(?!)
+* 若要再React上使用，要安裝 react-redux 套件
+* 是一個store工具，類似 Windows 的 Registry用來存放資料
