@@ -3,6 +3,7 @@ package com.chtti.fullstack.memo.Backend1_gradle.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -11,16 +12,37 @@ import java.util.Date;
  * 所以程式內容可以簡易很多
  * 如果有自定義的 有參數Constructor 又想保留自動生成 空constructor，則可加上
  *   ＠NoArgsConstructor
+ * @Entity
+ * 說明用於JPA對應
  */
 @Data
 @NoArgsConstructor
+@Entity
 public class Project {
+    /**
+     * @Id 說明是JPA中的pk
+     * @GeneratedValue(strategy = GenerationType.AUTO) 說明是交給JPA自動產生
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String projectName;
     private String projectIdentifier;
     private String description;
     private Date startDate;
     private Date endDate;
+    private Date createdAt;
+    private Date updatedAt;
+
+    @PrePersist // 要在創建前，記下時間
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate // 要在更新前，記下時間
+    protected void onUpdate() {
+        this.updatedAt = new Date();
+    }
 
     public Project(String projectName, String projectIdentifier) {
         this.projectName = projectName;
