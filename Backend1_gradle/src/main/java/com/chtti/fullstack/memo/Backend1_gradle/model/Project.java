@@ -60,4 +60,13 @@ public class Project {
         this.projectName = projectName;
         this.projectIdentifier = projectIdentifier;
     }
+
+    /**
+     * 跟 JPA 說明 Project 與 Backlog 之間的join關係為 1對1
+     * fetch: 撈 Project 時跟著撈 Backlog
+     * cascade: 刪除 Project 的時候跟著刪除 Backlog
+     * mappedBy: 在 Backlog 中是依靠 field:project 來關聯(如此就建立了雙向關聯了！但記得要在 Backlog 的 project 加上 @JsonIgnore，不然 ResponseEntity 會無窮遞迴輸出)
+     */
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    private Backlog backlog;
 }
