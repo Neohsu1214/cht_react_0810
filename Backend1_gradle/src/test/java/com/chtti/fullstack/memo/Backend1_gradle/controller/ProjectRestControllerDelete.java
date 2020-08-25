@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,14 +47,14 @@ public class ProjectRestControllerDelete {
         // 先查看目前筆數
         ResponseEntity<Project[]> entity1 = restTemplate.getForEntity(String.format(API_URL + "/all", port), Project[].class);
         LOGGER.info(String.format("Project Count: %d",entity1.getBody().length));
-        assertEquals(entity1.getBody().length, 1);
+        assertEquals(1, entity1.getBody().length);
         // 刪除
         restTemplate.delete(String.format(API_URL + "/" + PROJECT_IDENTIFIER, port));
         LOGGER.info("Delete Complete!");
         // 再查看目前筆數
         ResponseEntity<Project[]> entity2 = restTemplate.getForEntity(String.format(API_URL + "/all", port), Project[].class);
         LOGGER.info(String.format("Project Count: %d", entity2.getBody().length));
-        assertEquals(entity2.getBody().length, 0);
+        assertEquals(0, entity2.getBody().length);
     }
 
 }
