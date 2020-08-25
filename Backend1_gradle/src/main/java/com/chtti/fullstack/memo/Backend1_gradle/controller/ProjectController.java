@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/project")
@@ -29,8 +32,17 @@ public class ProjectController {
     createNewProject(@Valid @RequestBody Project project
             , BindingResult bindingResult) { // 有下達 @Valid 的話，會把驗證(NotBlank, Size等)的結果丟給 bindingResult 中
         if (bindingResult.hasErrors()) {
-            //return new ResponseEntity<>("Invalid Project Object", HttpStatus.BAD_REQUEST); // 只回傳簡短錯誤訊息
-            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.BAD_REQUEST); // 透過BindingResult取得完整錯誤訊息
+            // if validate error, then get collected errors here
+            // LV1. 只回傳簡短錯誤訊息
+            //return new ResponseEntity<>("Invalid Project Object", HttpStatus.BAD_REQUEST);
+            // LV2. 透過BindingResult取得完整錯誤訊息(有透露業務邏輯的風險)
+            //return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.BAD_REQUEST);
+            // LV3. 改用更客製化的回應錯誤訊息
+            Map<String, String> errorMap = new HashMap<>();
+            for (FieldError error: bindingResult.getFieldErrors()) {
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
         }
         // 送一個 project 進來處理
         Project project1 = projectService.saveOrUpdateProject(project);
