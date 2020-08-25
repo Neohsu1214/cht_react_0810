@@ -38,4 +38,15 @@ public class ProjectService {
         }
         return project;
     }
+
+    public void deleteProjectByIdentifier(String projectId) {
+        // 先查找指定資料
+        Project projectToDelete = repository.findByProjectIdentifier(projectId);
+        // 不存在要丟出 Exception
+        if (projectToDelete == null) {
+            throw new ProjectIdException(String.format("Can not delete project with Id %s, this project does not exist!", projectId));
+        }
+        // 存在才進行刪除
+        repository.delete(projectToDelete);
+    }
 }
