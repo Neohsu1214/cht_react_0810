@@ -5,6 +5,7 @@ import com.chtti.fullstack.memo.Backend1_gradle.model.Project;
 import com.chtti.fullstack.memo.Backend1_gradle.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 透過實作一個 Service 來作為 model 與 controller 之間的橋樑
@@ -24,5 +25,9 @@ public class ProjectService {
             // 針對 ProjectId 的 constrain 攔截 Exception 並自動轉給已註冊的全域 CustomResponseEntityExceptionHandler 處理
             throw new ProjectIdException(String.format("Project ID %s already existed!", upperCaseProjectId));
         }
+    }
+
+    public Iterable<Project> findAllProjects() {
+        return repository.findAll();
     }
 }
