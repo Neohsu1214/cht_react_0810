@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +25,9 @@ public class Backlog {
     @JoinColumn(name = "project_id", nullable = false) // 會在Table中自動產生一個欄位: PROJECT_ID
     @JsonIgnore // 代表此欄位不要在 ResponseEntity 中輸出
     private Project project;
+    /**
+     * 跟 JPA 說明 Backlog 與 ProjectTask 之間的join關係為 1對多
+     */
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "backlog")
+    private List<ProjectTask> projectTasks = new ArrayList<>();
 }
