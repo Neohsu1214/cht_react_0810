@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/project")
 public class ProjectController {
     @Autowired
@@ -61,5 +62,12 @@ public class ProjectController {
     public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
         Project project = projectService.findProjectByIdentifier(projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
+    }
+
+    private static final String DELETE_STRING = "Project with ID %s was deleted!";
+    @DeleteMapping("/{projectId}") // 因為 HTTP Method 不同，所以 path 相同做的事情也不一樣
+    public ResponseEntity<?> deleteProjectById(@PathVariable String projectId) {
+        projectService.deleteProjectByIdentifier(projectId);
+        return new ResponseEntity<>(String.format(DELETE_STRING, projectId), HttpStatus.OK);
     }
 }
