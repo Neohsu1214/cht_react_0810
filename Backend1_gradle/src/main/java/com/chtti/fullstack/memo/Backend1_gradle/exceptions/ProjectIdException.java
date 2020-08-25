@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * 一般 Exception 必須要 try-catch
  * RuntimeException 可不用 try-catch
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+//@ResponseStatus(HttpStatus.BAD_REQUEST) // 可以不宣告，交給 ExceptionHandler 定義的 HttpStatus 即可
 public class ProjectIdException extends RuntimeException{
     public ProjectIdException(String message) {
         super(message);
