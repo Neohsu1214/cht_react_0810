@@ -1,6 +1,7 @@
 package com.chtti.fullstack.memo.Backend1_gradle.controller;
 
 import com.chtti.fullstack.memo.Backend1_gradle.model.Project;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // 要有這段才能Inject TestRestTemplate 與 LocalServerPort
 public class ProjectRestControllerTest {
@@ -25,6 +27,14 @@ public class ProjectRestControllerTest {
     private TestRestTemplate restTemplate;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestRestTemplate.class);
+
+    /**
+     * 每次測試之前要先確定 TestRestTemplate 是可以被成功建立的才進行測試
+     */
+    @BeforeEach
+    public void testPrecondition() {
+        assertNotNull(restTemplate);
+    }
 
     /**
      * 驗證可增加資料
