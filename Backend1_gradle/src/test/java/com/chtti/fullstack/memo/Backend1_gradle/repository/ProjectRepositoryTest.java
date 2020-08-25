@@ -1,4 +1,4 @@
-package com.chtti.fullstack.memo.Backend1_gradle;
+package com.chtti.fullstack.memo.Backend1_gradle.repository;
 
 import com.chtti.fullstack.memo.Backend1_gradle.model.Project;
 import com.chtti.fullstack.memo.Backend1_gradle.repository.ProjectRepository;

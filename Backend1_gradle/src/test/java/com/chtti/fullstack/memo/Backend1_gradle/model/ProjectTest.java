@@ -1,6 +1,5 @@
-package com.chtti.fullstack.memo.Backend1_gradle;
+package com.chtti.fullstack.memo.Backend1_gradle.model;
 
-import com.chtti.fullstack.memo.Backend1_gradle.model.Project;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
