@@ -42,7 +42,7 @@ public class ProjectRestControllerTest {
     @Test
     public void addProjectSuccess() {
         Project project = new Project();
-        project.setProjectIdentifier("ABC1234");
+        project.setProjectIdentifier("ABC1234567");
         project.setDescription("Hi this is my first project");
         project.setProjectName("Demo Project1");
 
@@ -52,7 +52,7 @@ public class ProjectRestControllerTest {
         LOGGER.info("response code={}", response.getStatusCode());
         LOGGER.info("response={}", response.getBody());
         // 驗證結果
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     /**
@@ -61,19 +61,19 @@ public class ProjectRestControllerTest {
     @Test
     public void getAllProject() {
         Project project = new Project();
-        project.setProjectIdentifier("ABC1234");
+        project.setProjectIdentifier("ABC12345");
         project.setDescription("Hi this is my first project");
         project.setProjectName("Demo Project1");
         String localURL = String.format("http://localhost:%d/api/project", port);
         ResponseEntity<String> response =
                 restTemplate.postForEntity(localURL,
                         project, String.class);
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         ResponseEntity<Project[]> response2 =
                 restTemplate.getForEntity(localURL + "/all", Project[].class);
         Project[] projects = response2.getBody();
         MediaType contentType = response2.getHeaders().getContentType();
-        assertEquals(projects.length, 1);
+        assertEquals(3, projects.length);
         // 另一種 assertion 寫法
         assertThat(contentType).isEqualByComparingTo(MediaType.APPLICATION_JSON);
         assertThat(response2.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
@@ -90,13 +90,13 @@ public class ProjectRestControllerTest {
         ResponseEntity<String> response =
                 restTemplate.postForEntity(localURL,
                         project, String.class);
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         ResponseEntity<Project> response2 =
                 restTemplate.getForEntity(localURL + "/" + projectIdentifier, Project.class);
         Project getBackProject = response2.getBody();
         MediaType contentType = response2.getHeaders().getContentType();
         // 驗證取出的 ProjectIdentifier 資料是否一致
-        assertEquals(getBackProject.getProjectIdentifier(), projectIdentifier);
+        assertEquals(projectIdentifier, getBackProject.getProjectIdentifier());
     }
 
     /**
@@ -105,7 +105,7 @@ public class ProjectRestControllerTest {
     @Test
     public void addProjectMissingName() {
         Project project = new Project();
-        project.setProjectIdentifier("ABC1234");
+        project.setProjectIdentifier("ABC123456");
         project.setDescription("Hi this is my first project");
         //project.setProjectName("Demo Project1");
         ResponseEntity<String> response =
@@ -113,7 +113,7 @@ public class ProjectRestControllerTest {
                         project, String.class);
         LOGGER.info("response={}", response.getStatusCode());
         LOGGER.info("response={}",response.getBody());
-        assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     /**
@@ -131,7 +131,7 @@ public class ProjectRestControllerTest {
         Map<String, String> errorMessages = response.getBody();
         LOGGER.info("response={}", response.getStatusCode());
         LOGGER.info("response={}", errorMessages.get("projectName"));
-        assertEquals(errorMessages.get("projectName"), "project name is required!");
+        assertEquals("project name is required!", errorMessages.get("projectName"));
     }
 
     /**
@@ -153,8 +153,8 @@ public class ProjectRestControllerTest {
                 restTemplate.postForEntity(String.format("http://localhost:%d/api/project", port),
                         project, Map.class);
         Map<String, String> errorMessages2 = response2.getBody();
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
-        assertEquals(response2.getStatusCode(), HttpStatus.BAD_REQUEST);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(HttpStatus.BAD_REQUEST, response2.getStatusCode());
         LOGGER.info("duplicate message = {}", errorMessages2.get("projectIdentifier"));
     }
 }
