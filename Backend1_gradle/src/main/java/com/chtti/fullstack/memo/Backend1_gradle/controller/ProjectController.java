@@ -57,4 +57,9 @@ public class ProjectController {
         return projectService.findAllProjects();
     }
 
+    @GetMapping("/{projectId}") // {projectId} 的值會經由 @PathVariable 傳遞給 method 參數 projectId
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
+        Project project = projectService.findProjectByIdentifier(projectId);
+        return new ResponseEntity<>(project, HttpStatus.OK);
+    }
 }

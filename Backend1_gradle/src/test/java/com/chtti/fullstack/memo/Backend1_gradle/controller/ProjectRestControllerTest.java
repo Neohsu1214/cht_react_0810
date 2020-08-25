@@ -69,6 +69,26 @@ public class ProjectRestControllerTest {
         assertThat(response2.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
     }
 
+    @Test
+    public void getProjectByIdentifier() {
+        String projectIdentifier = "AAA-1234";
+        Project project = new Project();
+        project.setProjectIdentifier(projectIdentifier);
+        project.setDescription("Hi this is my first project");
+        project.setProjectName("Demo Project1");
+        String localURL = String.format("http://localhost:%d/api/project", port);
+        ResponseEntity<String> response =
+                restTemplate.postForEntity(localURL,
+                        project, String.class);
+        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        ResponseEntity<Project> response2 =
+                restTemplate.getForEntity(localURL + "/" + projectIdentifier, Project.class);
+        Project getBackProject = response2.getBody();
+        MediaType contentType = response2.getHeaders().getContentType();
+        // 驗證取出的 ProjectIdentifier 資料是否一致
+        assertEquals(getBackProject.getProjectIdentifier(), projectIdentifier);
+    }
+
     /**
      * 驗證針對資料不足的，可有效攔截並處理
      */
