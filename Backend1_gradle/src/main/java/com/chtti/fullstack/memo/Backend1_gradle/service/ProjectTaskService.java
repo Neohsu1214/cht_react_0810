@@ -2,6 +2,7 @@ package com.chtti.fullstack.memo.Backend1_gradle.service;
 
 import com.chtti.fullstack.memo.Backend1_gradle.exceptions.ProjectIdException;
 import com.chtti.fullstack.memo.Backend1_gradle.exceptions.ProjectIdIncorrectException;
+import com.chtti.fullstack.memo.Backend1_gradle.exceptions.ProjectTaskNotFoundException;
 import com.chtti.fullstack.memo.Backend1_gradle.model.Backlog;
 import com.chtti.fullstack.memo.Backend1_gradle.model.Project;
 import com.chtti.fullstack.memo.Backend1_gradle.model.ProjectTask;
@@ -24,7 +25,8 @@ public class ProjectTaskService {
     public enum Priority {
         NOT_SET(0), LOW(1), MEDIUM(2), HIGH(3);
         public final int value;
-        private Priority(int value){
+
+        private Priority(int value) {
             this.value = value;
         }
     }
@@ -33,6 +35,7 @@ public class ProjectTaskService {
     public enum Status {
         NOT_SET(""), TO_DO("TO_DO");
         public final String value;
+
         private Status(String value) {
             this.value = value;
         }
@@ -54,7 +57,7 @@ public class ProjectTaskService {
         projectTask.setProjectSequence(projectIdentifier + "-" + backlogSequence);
         projectTask.setProjectIdentifier(projectIdentifier);
         // 設定預設優先序: Medium
-        if (projectTask.getPriority() == null ||  projectTask.getPriority() ==Priority.NOT_SET.value){
+        if (projectTask.getPriority() == null || projectTask.getPriority() == Priority.NOT_SET.value) {
             projectTask.setPriority(Priority.MEDIUM.value);
         }
         // 設定預設狀態: Status
@@ -72,5 +75,14 @@ public class ProjectTaskService {
             throw new ProjectIdIncorrectException(message);
         }
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(projectIdentifier);
+    }
+
+    public ProjectTask findTaskByProjectSequence(String task_id) {
+        ProjectTask task = projectTaskRepository.findByProjectSequence(task_id);
+        if (task == null) {
+            String message = String.format("Project Task with Task Id:%s does not exist!", task_id);
+            throw new ProjectTaskNotFoundException(message);
+        }
+        return task;
     }
 }

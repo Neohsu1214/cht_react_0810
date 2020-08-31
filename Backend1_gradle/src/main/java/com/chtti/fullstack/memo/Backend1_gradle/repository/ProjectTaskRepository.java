@@ -10,4 +10,7 @@ import java.util.List;
 public interface ProjectTaskRepository extends CrudRepository<ProjectTask, Long> {
     // 依照JPA規範建立 method 取得 ProjectTask
     List<ProjectTask> findByProjectIdentifierOrderByPriority(String id);
+
+    // 用 Project Sequence 查找 Task
+    ProjectTask findByProjectSequence(String sequence) ;
 }

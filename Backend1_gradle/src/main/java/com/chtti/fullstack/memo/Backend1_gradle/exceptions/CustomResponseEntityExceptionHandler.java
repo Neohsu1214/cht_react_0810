@@ -48,4 +48,20 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                 new ProjectIdIncorrectExceptionResponse(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    /**
+     * 定義此 Method 是專門用來面對 所給定的 ProjectTaskId 找不到的時候產生的 RuntimeException
+     * 並且把它轉換成 Http 400 的錯誤訊息（原本丟出的是 Http 500）
+     * ExceptionResponse也必須與Exception類別對應！
+     * @param exception
+     * @param request
+     * @return
+     */
+    @ExceptionHandler
+    public final ResponseEntity<Object>
+    handleProjectTaskNotFoundException(ProjectTaskNotFoundException exception, WebRequest request) {
+        ProjectTaskNotFoundExceptionResponse response =
+                new ProjectTaskNotFoundExceptionResponse(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }
