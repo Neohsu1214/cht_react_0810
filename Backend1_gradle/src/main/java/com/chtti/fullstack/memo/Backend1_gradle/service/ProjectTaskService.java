@@ -67,7 +67,7 @@ public class ProjectTaskService {
     public Iterable<ProjectTask> findTaskById(String projectIdentifier) {
         Project project = projectRepository.findByProjectIdentifier(projectIdentifier);
         if (project == null) {
-            // 如果不存在這樣 ProjectId 的 Project，要丟出 Excpetion
+            // 如果不存在這樣 ProjectId 的 Project，要丟出 Exception
             String message = String.format("Project Identifier:%s is not existed!", projectIdentifier);
             throw new ProjectIdIncorrectException(message);
         }
