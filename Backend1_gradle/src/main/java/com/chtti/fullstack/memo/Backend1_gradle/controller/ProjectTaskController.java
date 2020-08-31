@@ -34,4 +34,11 @@ public class ProjectTaskController {
         ProjectTask updateTask = projectTaskService.updateByProjectSequence(projectTask);
         return new ResponseEntity<>(updateTask, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{task_id}")
+    public ResponseEntity<?> deleteProjectTask(@PathVariable String task_id) {
+        projectTaskService.deleteProjectTaskByProjectSequence(task_id);
+        String message = String.format("ProjectTask:%s was deleted successfully!", task_id);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }

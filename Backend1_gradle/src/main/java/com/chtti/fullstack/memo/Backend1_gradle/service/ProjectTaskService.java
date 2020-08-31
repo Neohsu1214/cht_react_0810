@@ -91,4 +91,9 @@ public class ProjectTaskService {
         updateTask.setBacklog(backlog);// 因為前端不會知道關聯，所以必須手動再將關聯更新，ORM才會去 mapping
         return projectTaskRepository.save(updateTask);
     }
+
+    public void deleteProjectTaskByProjectSequence(String task_id) {
+        ProjectTask task = projectTaskRepository.findByProjectSequence(task_id);
+        projectTaskRepository.delete(task);
+    }
 }
