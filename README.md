@@ -186,7 +186,7 @@ systemProp.https.proxyPort=8080
 5. 定義 Model 與限制 ex: NotBlank, Size, Column...etc
 6. RestController 透過 BindingResult 來取得 因限制丟出的錯誤
 7. 將 BindingResult 的處理獨立成一個Method 供其他 RestController 可共用處理 BindingResult 資料
-8. 對於 非BindingResult 可以處理的RuntimeException，要另外定義 Exception, ExceptionResponse 與 ExceptionHandler 來處理
+8. 對於 非BindingResult 可以處理的RuntimeException，要另外定義 Exception, ExceptionResponse 與 ExceptionHandler(ControllerAdvice) 來處理 Globally 的 Exception 
    如此才能將 RuntimeException 造成的 Http 500 改用別的 HttpStatus Code
    
 9. 等一切的 Exception 處理都到位後，才開始寫 RestController 的 測試程式
