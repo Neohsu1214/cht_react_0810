@@ -5,8 +5,12 @@ import com.chtti.fullstack.memo.Backend1_gradle.model.Backlog;
 import com.chtti.fullstack.memo.Backend1_gradle.model.Project;
 import com.chtti.fullstack.memo.Backend1_gradle.repository.BacklogRepository;
 import com.chtti.fullstack.memo.Backend1_gradle.repository.ProjectRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
 
 /**
  * 透過實作一個 Service 來作為 model 與 controller 之間的橋樑
@@ -40,7 +44,10 @@ public class ProjectService {
         }
     }
 
-    public Iterable<Project> findAllProjects() {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProjectService.class);
+    @Cacheable(value = "projects", condition = "!#noCache") // 當啟用 cache之後會發現，只有第一次呼叫時會輸出 Log! ehcache 是 method level 的 cache!如果不要也可以設定『noCache』
+    public Iterable<Project> findAllProjects(boolean noCache) {
+        LOGGER.info("get all projects from repository");
         return projectRepository.findAll();
     }
 

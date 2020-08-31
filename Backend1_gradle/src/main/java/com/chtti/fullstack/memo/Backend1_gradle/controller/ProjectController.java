@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -55,7 +53,7 @@ public class ProjectController {
 
     @GetMapping("/all")
     public Iterable<Project> getAllProjects() {
-        return projectService.findAllProjects();
+        return projectService.findAllProjects(true); // 不使用 cache
     }
 
     @GetMapping("/{projectId}") // {projectId} 的值會經由 @PathVariable 傳遞給 method 參數 projectId
