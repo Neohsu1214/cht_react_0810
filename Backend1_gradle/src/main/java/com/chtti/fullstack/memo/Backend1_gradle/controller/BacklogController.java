@@ -18,7 +18,7 @@ public class BacklogController {
     @Autowired
     private ProjectTaskService projectTaskService;
 
-    @PostMapping("/{project_id}")
+    @PostMapping("/{project_id}") // Post 要從 RequestBody 取得其他資訊！
     public ResponseEntity<?> addTaskToBacklog(@Valid @RequestBody ProjectTask projectTask,
                                               BindingResult result,
                                               @PathVariable String project_id) {
@@ -29,5 +29,10 @@ public class BacklogController {
         ProjectTask projectTaskToReturn =
                 projectTaskService.addProjectTask(project_id, projectTask);
         return new ResponseEntity<>(projectTaskToReturn, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{project_id}")
+    public Iterable<ProjectTask> getProjectTasks(@PathVariable String project_id) {
+        return projectTaskService.findTaskById(project_id);
     }
 }
