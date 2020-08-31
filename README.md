@@ -234,7 +234,7 @@ compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.4.1.jr
 ```
 * 修改 IntelliJ 專案 config 另外新增一個設定檔，使讀取 application-mssql.properties
 ```
-VM參數為  -Xmx2048m -Xms2048m -Dspring.profiles.active=mssql
+-Xmx2048m -Xms2048m -Dspring.profiles.active=mssql
 ```
 * application-mssql.properties 內容如下
 ```
@@ -250,4 +250,8 @@ spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect
 #update: 若無Table則啟動時建立, 若有則視有無變更自動Update
 #create-drop:啟動時建立Table, 當次Session關閉則刪除
 spring.jpa.hibernate.ddl-auto=create
+```
+* 原本的 application.properties 就改名成 application-h2.properties 吧，但記得要改一下啟動參數才會去抓 h2 DB
+```
+-Xmx2048m -Xms2048m -Dspring.profiles.active=h2
 ```
