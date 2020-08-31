@@ -90,7 +90,8 @@ npm install -g serve
 * 若要再React上使用，要安裝 react-redux 套件
 * 是一個store工具，類似 Windows 的 Registry用來存放資料
 
-### 一些 IntelliJ 上的設定
+# 後端開發 with IntelliJ
+## 一些 IntelliJ 上的設定
 1. Configure Settings
 ( ) (不選) Reopen projects on startup
 Open Project in New Window
@@ -208,3 +209,43 @@ visualvm_jdkhome="C:\\openjdk\\jbrsdk-11_0_8"
 * 安裝外掛程式
 1. VisualGC
 2. VisualVM-extensions
+
+## Docker 啓動微服務
+### Docker UI/Settings/Resources/Proxies
+```
+proxy.cht.com.tw:8080
+proxy.cht.com.tw:8080
+localhost,127.0.0.1
+```
+### 啟動 MSSQL 的 container
+```
+docker run -e "ACCEPT_EULA=y" -e "SA_PASSWORD=User1@302" -p 1433:1433 --name mssql -d mcr.microsoft.com/mssql/server:2019-latest
+```
+### 下載 DBeaver 連線 MSSQL
+```
+https://dbeaver.io/files/dbeaver-ce-latest-installer.pkg
+```
+### Springboot 專案安裝 MSSQL jdbc driver
+* 找到 mvn 上的 mssql jdbc driver
+* 修改 build.gradle 加入
+```
+// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
+compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.4.1.jre11'
+```
+* 修改 IntelliJ 專案 config 另外新增一個設定檔，使讀取 application-mssql.properties
+```
+VM參數為  -Xmx2048m -Xms2048m -Dspring.profiles.active=mssql
+```
+* application-mssql.properties 內容如下
+```
+spring.h2.console.enabled=false
+spring.datasource.url=jdbc:sqlserver://127.0.0.1;databaseName=ReactBoot
+spring.datasource.username=sa
+spring.datasource.password=User1@302
+spring.datasource.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format-sql=true
+spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect
+# create: 每次都要清空DB重新建立！
+spring.jpa.hibernate.ddl-auto=create
+```
