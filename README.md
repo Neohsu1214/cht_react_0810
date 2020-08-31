@@ -255,3 +255,9 @@ spring.jpa.hibernate.ddl-auto=create
 ```
 -Xmx2048m -Xms2048m -Dspring.profiles.active=h2
 ```
+
+# Cache
+## ehcache: 介於 Connection Pool 與 JPA 之間的快取技術，使不會頻繁地存取DB
+```
+https://www.ehcache.org/
+```
