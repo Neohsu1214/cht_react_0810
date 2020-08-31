@@ -34,6 +34,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
 	//compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.4.1.jre11'
 	implementation 'com.microsoft.sqlserver:mssql-jdbc:8.4.1.jre11'
+	// 使可使用 cache
+	implementation 'org.ehcache:ehcache'
+	implementation 'javax.cache:cache-api'
 }
 
 test {
