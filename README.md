@@ -261,3 +261,32 @@ spring.jpa.hibernate.ddl-auto=create
 ```
 https://www.ehcache.org/
 ```
+
+# 啓動微服務
+## 產生 jar 檔 (不會跑test)
+```
+./gradlew bootJar
+```
+## 啟動 jar 檔 (參數的順序很重要！)
+``` mssql版
+java -Xmx2048m -Xms2048m -Dspring.profiles.active=mssql -jar build/libs/Backend1-0.0.1-SNAPSHOT.jar 
+```
+``` h2版
+java -Xmx2048m -Xms2048m -Dspring.profiles.active=h2 -jar build/libs/Backend1-0.0.1-SNAPSHOT.jar 
+```
+## 建立 Dockerfile 包裝 docker image
+```
+FROM adoptopenjdk/openjdk11:latest
+EXPOSE 8080
+ARG JAR_FILE=build/libs/Backend1_gradle-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-Xmx2048m","-Xms2048m","-Dspring.profiles.active=mssql","-jar","/app.jar"]
+```
+## 包裝產出 docker image
+```
+docker build -t boot1 . --no-cache
+```
+## 啟動 container 帶起服務
+```
+docker run -p 8080:8080 boot1
+```
