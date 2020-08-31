@@ -1,5 +1,6 @@
 package com.chtti.fullstack.memo.Backend1_gradle.service;
 
+import com.chtti.fullstack.memo.Backend1_gradle.exceptions.ProjectIdException;
 import com.chtti.fullstack.memo.Backend1_gradle.model.Backlog;
 import com.chtti.fullstack.memo.Backend1_gradle.model.ProjectTask;
 import com.chtti.fullstack.memo.Backend1_gradle.repository.BacklogRepository;
@@ -35,6 +36,11 @@ public class ProjectTaskService {
     public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask) {
         // 先用 projectIdentifier 找到 backlog 並設定 projectTask 關聯
         Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
+        if (backlog == null) {
+            // 當 backlog 抓不到時，要進行處理，否則會丟出 500 的內部錯誤
+            String message = String.format("Project identifier: %s not found", projectIdentifier);
+            throw new ProjectIdException(message);
+        }
         projectTask.setBacklog(backlog);
         //
         Integer backlogSequence = backlog.getPTSequence();
