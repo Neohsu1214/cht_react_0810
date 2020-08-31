@@ -85,4 +85,10 @@ public class ProjectTaskService {
         }
         return task;
     }
+
+    public ProjectTask updateByProjectSequence(ProjectTask updateTask) {
+        Backlog backlog = backlogRepository.findByProjectIdentifier(updateTask.getProjectIdentifier());
+        updateTask.setBacklog(backlog);// 因為前端不會知道關聯，所以必須手動再將關聯更新，ORM才會去 mapping
+        return projectTaskRepository.save(updateTask);
+    }
 }
