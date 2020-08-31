@@ -274,13 +274,13 @@ java -Xmx2048m -Xms2048m -Dspring.profiles.active=mssql -jar build/libs/Backend1
 ``` h2版
 java -Xmx2048m -Xms2048m -Dspring.profiles.active=h2 -jar build/libs/Backend1-0.0.1-SNAPSHOT.jar 
 ```
-## 建立 Dockerfile 包裝 docker image
+## 建立 Dockerfile 包裝 docker image (DB先設定成連線h2版本)
 ```
 FROM adoptopenjdk/openjdk11:latest
 EXPOSE 8080
 ARG JAR_FILE=build/libs/Backend1_gradle-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-Xmx2048m","-Xms2048m","-Dspring.profiles.active=mssql","-jar","/app.jar"]
+ENTRYPOINT ["java","-Xmx2048m","-Xms2048m","-Dspring.profiles.active=h2","-jar","/app.jar"]
 ```
 ## 包裝產出 docker image
 ```
