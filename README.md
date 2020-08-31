@@ -159,3 +159,50 @@ systemProp.https.proxyPort=8080
 1. bootrun
 2. 包裝成可執行檔 jar
 3. 包裝成可部署檔 war
+
+### JUnit Test 基礎原則
+* Model要有 ModelTest
+* Repository 要有 RepositoryTest
+* Service 要有 ServiceTest
+* Controller...要用工具測試啦！不能再用JUnit了！
+  * AdvancedRestClient
+  * Postman
+  * 可在 /h2-console 查看資料寫入結果
+
+### 透過 Swagger工具產生 SwaggerUI
+* https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+* https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+* 修改 build.gradle 加入
+  * implementation 'io.springfox:springfox-boot-starter:3.0.0'
+  * implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+* 可以在 localhost:8080/swagger-ui/ 看到結果，並進行 on-line 測試
+
+### Springboot 開發歷程
+1. 定義 Model -> 寫 Model Test Class
+2. 定義 Repository -> 寫 Repository Test Class
+3. 定義 Service -> 寫 Service Test Class
+4. 定義 RestController -> 用工具測試 RestController (等都開發成熟後再去寫測試程式)
+
+5. 定義 Model 與限制 ex: NotBlank, Size, Column...etc
+6. RestController 透過 BindingResult 來取得 因限制丟出的錯誤
+7. 將 BindingResult 的處理獨立成一個Method 供其他 RestController 可共用處理 BindingResult 資料
+8. 對於 非BindingResult 可以處理的RuntimeException，要另外定義 Exception, ExceptionResponse 與 ExceptionHandler 來處理
+   如此才能將 RuntimeException 造成的 Http 500 改用別的 HttpStatus Code
+   
+9. 等一切的 Exception 處理都到位後，才開始寫 RestController 的 測試程式
+   要對增刪改查都驗證過
+
+10. 切記！別讓後端的內部錯誤資訊，直接原封不動地拋到前端去！
+    
+### 一個觀察Java 記憶體使用狀況的工具
+* VisualVM
+```
+https://visualvm.github.io/   
+```
+* 修改 visualvm.cfg，設定 jdk home 目錄
+```
+visualvm_jdkhome="C:\\openjdk\\jbrsdk-11_0_8"
+```
+* 安裝外掛程式
+1. VisualGC
+2. VisualVM-extensions
