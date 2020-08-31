@@ -1,15 +1,20 @@
 package com.chtti.fullstack.memo.Backend1_gradle.service;
 
 import com.chtti.fullstack.memo.Backend1_gradle.exceptions.ProjectIdException;
+import com.chtti.fullstack.memo.Backend1_gradle.exceptions.ProjectIdIncorrectException;
 import com.chtti.fullstack.memo.Backend1_gradle.model.Backlog;
+import com.chtti.fullstack.memo.Backend1_gradle.model.Project;
 import com.chtti.fullstack.memo.Backend1_gradle.model.ProjectTask;
 import com.chtti.fullstack.memo.Backend1_gradle.repository.BacklogRepository;
+import com.chtti.fullstack.memo.Backend1_gradle.repository.ProjectRepository;
 import com.chtti.fullstack.memo.Backend1_gradle.repository.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectTaskService {
+    @Autowired
+    private ProjectRepository projectRepository;
     @Autowired
     private BacklogRepository backlogRepository;
     @Autowired
@@ -60,6 +65,12 @@ public class ProjectTaskService {
     }
 
     public Iterable<ProjectTask> findTaskById(String projectIdentifier) {
+        Project project = projectRepository.findByProjectIdentifier(projectIdentifier);
+        if (project == null) {
+            // 如果不存在這樣 ProjectId 的 Project，要丟出 Excpetion
+            String message = String.format("Project Identifier:%s is not existed!", projectIdentifier);
+            throw new ProjectIdIncorrectException(message);
+        }
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(projectIdentifier);
     }
 }
