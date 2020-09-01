@@ -290,3 +290,12 @@ docker build -t boot1 . --no-cache
 ```
 docker run -p 8080:8080 boot1
 ```
+
+# Redux
+## Lab4_Redux_Only
+* 用來說明 Redux 之 state 管理工具
+* 初始化一個node環境
+```
+npm init -y
+npm install redux
+```
