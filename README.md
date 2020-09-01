@@ -218,7 +218,7 @@ proxy.cht.com.tw:8080
 localhost,127.0.0.1
 ```
 ### 啟動 MSSQL 的 container
-```
+```docker
 docker run -e "ACCEPT_EULA=y" -e "SA_PASSWORD=User1@302" -p 1433:1433 --name mssql -d mcr.microsoft.com/mssql/server:2019-latest
 ```
 ### 下載 DBeaver 連線 MSSQL
@@ -228,7 +228,7 @@ https://dbeaver.io/files/dbeaver-ce-latest-installer.pkg
 ### Springboot 專案安裝 MSSQL jdbc driver
 * 找到 mvn 上的 mssql jdbc driver
 * 修改 build.gradle 加入
-```
+```gradle
 // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
 compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.4.1.jre11'
 ```
@@ -268,14 +268,16 @@ https://www.ehcache.org/
 ./gradlew bootJar
 ```
 ## 啟動 jar 檔 (參數的順序很重要！)
-``` mssql版
+* mssql版
+``` 
 java -Xmx2048m -Xms2048m -Dspring.profiles.active=mssql -jar build/libs/Backend1-0.0.1-SNAPSHOT.jar 
 ```
-``` h2版
+* h2版
+``` 
 java -Xmx2048m -Xms2048m -Dspring.profiles.active=h2 -jar build/libs/Backend1-0.0.1-SNAPSHOT.jar 
 ```
 ## 建立 Dockerfile 包裝 docker image (DB先設定成連線h2版本)
-```
+```docker
 FROM adoptopenjdk/openjdk11:latest
 EXPOSE 8080
 ARG JAR_FILE=build/libs/Backend1_gradle-0.0.1-SNAPSHOT.jar
@@ -302,4 +304,17 @@ npm install redux
 * 安裝 redux-logger 即時查看 state 內容
 ```
 npm install redux-logger
+```
+## Lab5: React 整合 Redux 與 Axios
+* 新增一個 react 專案
+```
+npx create-react-app lab5_react_redux
+```
+* 安裝 redux, redux-thunk, redux-logger
+```
+npm install redux redux-thunk redux-logger
+```
+* 安裝 react-redux (讓 redux 與 react UI元件整合)
+```
+npm install react-redux
 ```
