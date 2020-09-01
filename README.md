@@ -319,3 +319,7 @@ npm install redux redux-thunk redux-logger
 npm install react-redux
 ```
 * 剩下的版本異動內容就看 Git Graph 吧！
+* 安裝 很酷的 redux debug 工具，可以看到 state 改變的歷程
+```
+npm install redux-devtools-extension
+```
