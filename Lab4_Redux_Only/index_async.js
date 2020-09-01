@@ -78,12 +78,12 @@ const fetchProjects = () => {
 
         axios.get(GET_URL)
         .then((response)=> {
-            console.log(response.data)
+            //console.log(response.data)
             const projects = response.data.map((project)=>project.projectName) // 透過map來保留指定資料
             dispatch(fetchProjectSuccess(projects))
         })
         .catch((error)=>{
-            console.log(error)
+            //console.log(error)
             dispatch(fetchProjectFailure(error.response.data))
         })
     }
