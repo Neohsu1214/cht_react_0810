@@ -9,6 +9,7 @@ console.log("販賣機lab for redux!");
 
 const redux = require("redux");
 const createStore = redux.createStore;
+const combineReducers = redux.combineReducers; // 用來將多個 reducer 包成一個 reducer
 
 // action ==> intenstion, the act will be perform
 const BUY_COKE = "BUY_COKE";
@@ -39,16 +40,20 @@ function buyFanta() {
 }
 
 // store ==> state management，對一個App而言只會有一個store
-const initialState = {
+const initialCokeState = {
   numOfCokes: 100,
+};
+const initialSpriteState = {
   numOfSprites: 100,
+};
+const initialFantaState = {
   numOfFantas: 50,
 };
 
 // reducer ==> connect store & action, receive action, perform something in store, return a "new" state
 // reducer is a pure function, 可以在任何地方呼叫
 // 給予 舊的值，會 return 新的值
-const reducer = (state = initialState, action) => {
+const initCokeReducer = (state = initialCokeState, action) => {
   switch (action.type) {
     case BUY_COKE:
       return {
@@ -56,11 +61,25 @@ const reducer = (state = initialState, action) => {
         numOfCokes: state.numOfCokes - 1,
         //numOfSprites: state.numOfSprites // 數量一多就麻煩了，要改用 ...
       };
+    default:
+      // 這個 default 很重要，一定要寫！不然會狂報錯！！當以上皆非時，就直接回傳state
+      return state;
+  }
+};
+const initSpriteReducer = (state = initialSpriteState, action) => {
+  switch (action.type) {
     case BUY_SPRITE:
       return {
         ...state,
         numOfSprites: state.numOfSprites - 1,
       };
+    default:
+      // 這個 default 很重要，一定要寫！不然會狂報錯！！當以上皆非時，就直接回傳state
+      return state;
+  }
+};
+const initFantaReducer = (state = initialFantaState, action) => {
+  switch (action.type) {
     case BUY_FANTA:
       return {
         ...state,
@@ -73,7 +92,12 @@ const reducer = (state = initialState, action) => {
 };
 
 // store ==> state management
-const store = createStore(reducer); // OK! redux 的 store 建立完成！
+const rootReducer = combineReducers({
+    coke: initCokeReducer,
+    sprite: initSpriteReducer,
+    fanta: initFantaReducer
+})
+const store = createStore(rootReducer); // OK! redux 的 store 建立完成！
 console.log("initial state, coke=", store.getState()); // 主動地透過 getState() 取得 state 內容
 // 註冊一個監聽動作，當 state有改變時，被動地接收 state 異動資訊
 unsubscribeDB = store.subscribe(() => {
@@ -101,5 +125,7 @@ store.dispatch(buyCoke());
 store.dispatch(buySprite());
 store.dispatch(buySprite());
 store.dispatch(buySprite());
+
+console.log(`current in stock, coke=${store.getState().coke.numOfCokes}, sprite=${store.getState().sprite.numOfSprites}, fanta=${store.getState().fanta.numOfFantas}`)
 unsubscribe2(); // 取消監聽2
 unsubscribeDB(); // 取消監聽DB
