@@ -8,7 +8,10 @@
 
 const redux = require("redux");
 const createStore = redux.createStore;
-
+const applyMiddleware = redux.applyMiddleware
+const thunkMiddleware = require('redux-thunk').default // 使 redux 可處理 async
+const axios = require('axios');
+const { default: thunk } = require("redux-thunk");
 
 //state
 const initState = {
@@ -66,5 +69,5 @@ const reducer = (state = initState, action) => {
 };
 
 //store
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(thunkMiddleware))
 console.log("Create a aync API call!")
