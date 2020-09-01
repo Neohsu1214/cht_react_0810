@@ -7,7 +7,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {buyCoke} from '../redux' // 由 redux 目錄引用 buyCoke
 
 function HookCokeContainer() {
-    const numOfCokes = useSelector(state => state.numOfCokes)
+    const numOfCokes = useSelector(state => state.coke.numOfCokes)
     const dispatch = useDispatch()
 
     return (

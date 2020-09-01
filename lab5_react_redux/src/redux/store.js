@@ -1,6 +1,6 @@
 import { createStore } from "redux";
-import cokeReducer from "./coke/CokeReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from "./rootReducer";
 
-const store = createStore(cokeReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools());
 export default store;

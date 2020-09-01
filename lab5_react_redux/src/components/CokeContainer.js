@@ -16,7 +16,7 @@ function CokeContainer(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        numOfCokes: state.numOfCokes
+        numOfCokes: state.coke.numOfCokes
     }
 }
 const mapDispatchToProps = (dispatch) => {
