@@ -7,9 +7,11 @@
  */
 
 const redux = require("redux");
+const reduxLogger = require('redux-logger')
 const createStore = redux.createStore;
 const applyMiddleware = redux.applyMiddleware;
 const thunkMiddleware = require("redux-thunk").default; // 使 redux 可處理 async
+const logger = reduxLogger.createLogger() // 建立一個 redux-logger 觀察 state 異動前後資料
 const axios = require("axios");
 
 //state
@@ -88,7 +90,7 @@ const fetchProjects = () => {
 }
 
 //store
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 console.log("Create a aync API call!");
-store.subscribe(()=>{console.log(store.getState())})
+//store.subscribe(()=>{console.log(store.getState())})
 store.dispatch(fetchProjects()) // 透過雙層dispatch做到非同步呼叫更新store內容
