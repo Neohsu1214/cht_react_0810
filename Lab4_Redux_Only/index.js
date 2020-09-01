@@ -10,6 +10,9 @@ console.log("販賣機lab for redux!");
 const redux = require("redux");
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers; // 用來將多個 reducer 包成一個 reducer
+const applyMiddleware = redux.applyMiddleware; // 使用 redux 的 middleware，用來掛在store上使用
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger(); // 產生一個 redux-logger 來使用，為一種可觀察state異動前後的 middleware
 
 // action ==> intenstion, the act will be perform
 const BUY_COKE = "BUY_COKE";
@@ -93,11 +96,11 @@ const initFantaReducer = (state = initialFantaState, action) => {
 
 // store ==> state management
 const rootReducer = combineReducers({
-    coke: initCokeReducer,
-    sprite: initSpriteReducer,
-    fanta: initFantaReducer
-})
-const store = createStore(rootReducer); // OK! redux 的 store 建立完成！
+  coke: initCokeReducer,
+  sprite: initSpriteReducer,
+  fanta: initFantaReducer,
+});
+const store = createStore(rootReducer, applyMiddleware(logger)); // OK! redux 的 store 建立完成！
 console.log("initial state, coke=", store.getState()); // 主動地透過 getState() 取得 state 內容
 // 註冊一個監聽動作，當 state有改變時，被動地接收 state 異動資訊
 unsubscribeDB = store.subscribe(() => {
@@ -126,6 +129,6 @@ store.dispatch(buySprite());
 store.dispatch(buySprite());
 store.dispatch(buySprite());
 
-console.log(`current in stock, coke=${store.getState().coke.numOfCokes}, sprite=${store.getState().sprite.numOfSprites}, fanta=${store.getState().fanta.numOfFantas}`)
+console.log(`current in stock, coke=${store.getState().coke.numOfCokes}, sprite=${store.getState().sprite.numOfSprites}, fanta=${store.getState().fanta.numOfFantas}`);
 unsubscribe2(); // 取消監聽2
 unsubscribeDB(); // 取消監聽DB

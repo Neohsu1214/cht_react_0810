@@ -299,3 +299,7 @@ docker run -p 8080:8080 boot1
 npm init -y
 npm install redux
 ```
+* 安裝 redux-logger 即時查看 state 內容
+```
+npm install redux-logger
+```
