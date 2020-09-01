@@ -101,14 +101,14 @@ const rootReducer = combineReducers({
   fanta: initFantaReducer,
 });
 const store = createStore(rootReducer, applyMiddleware(logger)); // OK! redux 的 store 建立完成！
-console.log("initial state, coke=", store.getState()); // 主動地透過 getState() 取得 state 內容
-// 註冊一個監聽動作，當 state有改變時，被動地接收 state 異動資訊
-unsubscribeDB = store.subscribe(() => {
-  console.log("log something to DB::", store.getState());
-});
-unsubscribe1 = store.subscribe(() => {
-  console.log("monitor change, state=", store.getState());
-});
+// console.log("initial state, coke=", store.getState()); // 主動地透過 getState() 取得 state 內容
+// // 註冊一個監聽動作，當 state有改變時，被動地接收 state 異動資訊
+// unsubscribeDB = store.subscribe(() => {
+//   console.log("log something to DB::", store.getState());
+// });
+// unsubscribe1 = store.subscribe(() => {
+//   console.log("monitor change, state=", store.getState());
+// });
 
 // perform something in store
 console.log("David buy a coke");
@@ -118,10 +118,10 @@ store.dispatch(buyCoke());
 store.dispatch(buyCoke());
 store.dispatch(buyFanta());
 store.dispatch(buyFanta());
-unsubscribe1(); // 取消監聽1
-unsubscribe2 = store.subscribe(() => {
-  console.log("** change, state=", store.getState());
-}); // 改用新的監聽
+// unsubscribe1(); // 取消監聽1
+// unsubscribe2 = store.subscribe(() => {
+//   console.log("** change, state=", store.getState());
+// }); // 改用新的監聽
 console.log("Mary buy 2 cokes, 3 sprits:");
 store.dispatch(buyCoke());
 store.dispatch(buyCoke());
@@ -130,5 +130,5 @@ store.dispatch(buySprite());
 store.dispatch(buySprite());
 
 console.log(`current in stock, coke=${store.getState().coke.numOfCokes}, sprite=${store.getState().sprite.numOfSprites}, fanta=${store.getState().fanta.numOfFantas}`);
-unsubscribe2(); // 取消監聽2
-unsubscribeDB(); // 取消監聽DB
+// unsubscribe2(); // 取消監聽2
+// unsubscribeDB(); // 取消監聽DB
