@@ -318,3 +318,4 @@ npm install redux redux-thunk redux-logger
 ```
 npm install react-redux
 ```
+* 剩下的版本異動內容就看 Git Graph 吧！
