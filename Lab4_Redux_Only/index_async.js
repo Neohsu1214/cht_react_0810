@@ -69,6 +69,7 @@ const reducer = (state = initState, action) => {
 
 //async action
 const GET_URL = "http://localhost:8080/api/project/all"
+const GET_URL_EXCEPTION = "http://localhost:8080/api/project/BOOT_REACT123"
 const fetchProjects = () => {
     return function (dispatch) {
         dispatch(fetchProjectRequest())
