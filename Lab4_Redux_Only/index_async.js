@@ -8,10 +8,9 @@
 
 const redux = require("redux");
 const createStore = redux.createStore;
-const applyMiddleware = redux.applyMiddleware
-const thunkMiddleware = require('redux-thunk').default // 使 redux 可處理 async
-const axios = require('axios');
-const { default: thunk } = require("redux-thunk");
+const applyMiddleware = redux.applyMiddleware;
+const thunkMiddleware = require("redux-thunk").default; // 使 redux 可處理 async
+const axios = require("axios");
 
 //state
 const initState = {
@@ -32,7 +31,7 @@ const fetchProjectRequest = () => {
 };
 const fetchProjectSuccess = (projects) => {
   return {
-    type: FETCH_PORJECT_SUCCESS,
+    type: FETCH_PROJECT_SUCCESS,
     payload: projects,
   };
 };
@@ -68,6 +67,24 @@ const reducer = (state = initState, action) => {
   }
 };
 
+//async action
+const GET_URL = "http://localhost:8080/api/project/all"
+const fetchProjects = () => {
+    return function (dispatch) {
+        dispatch(fetchProjectRequest())
+
+        axios.get(GET_URL)
+        .then((response)=> {
+            console.log(response.data)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    }
+}
+
 //store
-const store = createStore(reducer, applyMiddleware(thunkMiddleware))
-console.log("Create a aync API call!")
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+console.log("Create a aync API call!");
+store.subscribe(()=>{console.log(store.getState())})
+store.dispatch(fetchProjects()) // 透過雙層dispatch做到非同步呼叫更新store內容
