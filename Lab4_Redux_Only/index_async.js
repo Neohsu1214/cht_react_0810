@@ -76,9 +76,11 @@ const fetchProjects = () => {
         axios.get(GET_URL)
         .then((response)=> {
             console.log(response.data)
+            dispatch(fetchProjectSuccess(response.data))
         })
         .catch((error)=>{
             console.log(error)
+            dispatch(fetchProjectFailure(error))
         })
     }
 }
