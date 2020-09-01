@@ -3,6 +3,7 @@ import "./App.css";
 import CokeContainer from "./components/CokeContainer";
 import { Provider } from "react-redux"; 
 import store from "./redux/store";
+import HookCokeContainer from "./components/HookCokeContainer";
 
 /**
  * Provider 是 hook React 與 Redux store 的 bridge
@@ -13,6 +14,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <CokeContainer />
+        <HookCokeContainer/>
       </div>
     </Provider>
   );
