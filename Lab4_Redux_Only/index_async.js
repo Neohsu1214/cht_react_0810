@@ -81,7 +81,7 @@ const fetchProjects = () => {
         })
         .catch((error)=>{
             console.log(error)
-            dispatch(fetchProjectFailure(error))
+            dispatch(fetchProjectFailure(error.response.data))
         })
     }
 }
